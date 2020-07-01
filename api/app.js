@@ -9,12 +9,20 @@ const bodyParser = require('body-parser');
 const apiRoutes = require('./routes');
 //importing sequelize database object
 const db = require('./db');
+//importing CORS
+const cors = require('cors');
+//importing info's about available routes
+const message = require('./routes/info');
+
 
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 
 // create the Express app
 const app = express();
+
+//enable all cors requests
+app.use(cors());
 
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
@@ -27,9 +35,7 @@ app.use('/api', apiRoutes);
 
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {
-  res.json({
-    message: 'Welcome to the REST API project!',
-  });
+  res.send(message);
 });
 
 // send 404 if no other route matched
