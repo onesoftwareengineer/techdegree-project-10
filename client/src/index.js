@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
+
+import './styles/global.css';
+
 import App from './App';
+//import context provider for whole app
+import { Provider } from './Context';
 
 ReactDOM.render(
   <Provider>
     <App />
-  </Provider>
+  </Provider>,
   document.getElementById('root')
 );

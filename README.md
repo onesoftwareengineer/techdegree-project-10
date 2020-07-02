@@ -1,5 +1,8 @@
 # techdegree-project-10
 
+* If you publish the project online please credit the source of the favicon image
+<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
 # REST API for a school database
 The API will provide a way for users to administer a school database containing information about courses: users can interact with the database by retrieving a list of courses, as well as adding, updating and deleting courses in the database. 
 
