@@ -18,7 +18,10 @@ const Header = (props) => {
                 <h1 className="header--logo">Courses</h1>
                 { authenticatedUser ? 
                     <nav><span>Welcome {authenticatedUser}</span><a className="signout" href="index.html">Sign Out</a></nav> : 
-                    <nav><a className="signup" href="sign-up.html">Sign Up</a><a className="signin" href="sign-in.html">Sign In</a></nav>
+                    <nav>
+                        <a className="signup" href="sign-up.html">Sign Up</a>
+                        <a className="signin" href="sign-in.html">Sign In</a>
+                    </nav>
                 }
             </div>
         </div>
