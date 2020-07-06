@@ -11,6 +11,10 @@ import './styles/global.css';
 import Header from './components/Header';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
+import NotFound from './components/NotFound';
+import UnhandledError from './components/UnhandledError';
+import Forbidden from './components/Forbidden';
+import UserSignIn from './components/UserSignIn';
 
 export default () => (
   <Router>
@@ -19,7 +23,12 @@ export default () => (
 
       <Switch>
         <Route exact path="/" component={Courses} />
+        <Route path="" component={UserSignIn} />
         <Route path="/courses/:id" component={CourseDetail} />
+        <Route path="/error" component={UnhandledError} />
+        <Route path="/forbidden" component={Forbidden} />
+        
+        <Route component={NotFound} />
       </Switch>
     </div>
   </Router>

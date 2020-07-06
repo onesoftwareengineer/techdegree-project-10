@@ -2,7 +2,7 @@
 //     retrieves the detail for a course from the REST API, 
 //     renders the course details, 
 //     an "Update Course" button for navigating to the "Update Course" screen, 
-//     and a "Delete Course" button that when clicked sends a DELETE request to the REST API to delete a course.
+//     and a "Delete Course" button that when clicked sends a DELETE request to the REST API to delete a course. 
 
 import React, {Component} from 'react';
 import withContext from '../Context';
@@ -17,7 +17,8 @@ class CourseDetail extends Component {
             descriptionParagraphs: null, 
             estimatedTime: null, 
             materialsArray: null,
-            postedBy: null
+            postedBy: null,
+            userId: null
         };
     }
 
@@ -62,7 +63,8 @@ class CourseDetail extends Component {
                     descriptionParagraphs,
                     estimatedTime,
                     materialsArray,
-                    postedBy
+                    postedBy,
+                    userId: User.id
                 });
             } else {
                 //if course not found, api will return a 404 and user will be forwarded to notfound page
@@ -74,6 +76,7 @@ class CourseDetail extends Component {
     }
 
     render () {
+        //building the material list by mapping through the materials array
         const materialsJSX = this.state.materialsArray ?                            
             this.state.materialsArray.map( (element, index) => 
                 (
@@ -81,7 +84,8 @@ class CourseDetail extends Component {
                 )
             ) : null;
 
-            const descriptionJSX = this.state.descriptionParagraphs ?                            
+        //building the description paragraphs by mapping through the description paragraphs array
+        const descriptionJSX = this.state.descriptionParagraphs ?                            
             this.state.descriptionParagraphs.map( (element, index) => 
                 (
                     <p key={index}>{element}</p>
@@ -95,9 +99,15 @@ class CourseDetail extends Component {
             
             <div className="actions--bar">
                 <div className="bounds">
-                    <div className="grid-100"><span>
-                        <Link className="button" to={`/courses/${this.state.id}/update`}>Update Course</Link>
-                        <a className="button" href="#">Delete Course</a></span>
+                    <div className="grid-100">
+                        {
+                            this.state.userId === this.props.context.authenticatedUserId ?
+
+                                    <span>
+                                    <Link className="button" to={`/courses/${this.state.id}/update`}>Update Course</Link>
+                                    <a className="button" href="#">Delete Course</a></span> 
+                                : null
+                        }
                         <Link className="button button-secondary" to="/">Return to List</Link>
                     </div>
                 </div>
@@ -117,16 +127,20 @@ class CourseDetail extends Component {
                 <div className="grid-25 grid-right">
                     <div className="course--stats">
                     <ul className="course--stats--list">
-                        <li className="course--stats--list--item">
-                        <h4>Estimated Time</h4>
-                        <h3>{this.state.estimatedTime}</h3>
-                        </li>
-                        <li className="course--stats--list--item">
-                        <h4>Materials Needed</h4>
-                        <ul>
-                            {materialsJSX}
-                        </ul>
-                        </li>
+                        {   this.state.estimatedTime ? 
+                            <li className="course--stats--list--item">
+                                <h4>Estimated Time</h4>
+                                <h3>{this.state.estimatedTime}</h3>
+                            </li> : null
+                        }
+                        {   this.state.materialsArray ?                    
+                            <li className="course--stats--list--item">
+                                <h4>Materials Needed</h4>
+                                <ul>
+                                    {materialsJSX}
+                                </ul>
+                            </li> : null
+                        }
                     </ul>
                     </div>
                 </div>

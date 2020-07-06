@@ -6,7 +6,8 @@ const AppContext = React.createContext();
 //export context provider to wrap App in context and provide it to the whole app
 export class Provider extends Component {
     state = {
-        authenticatedUser: "Daniel"
+        authenticatedUser: null,
+        authenticatedUserId: 1
     }
 
     render () {
@@ -14,6 +15,7 @@ export class Provider extends Component {
             <AppContext.Provider value={
                 {
                     authenticatedUser: this.state.authenticatedUser,
+                    authenticatedUserId: this.state.authenticatedUserId,
                     axiosRequest
                 }
             }>
