@@ -7,6 +7,7 @@
 
 import React from 'react';
 import withContext from '../Context';
+import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
     const { context } = props;
@@ -15,12 +16,12 @@ const Header = (props) => {
     return (
         <div className="header">
             <div className="bounds">
-                <h1 className="header--logo">Courses</h1>
+                <NavLink to="/"><h1 className="header--logo">Courses</h1></NavLink>
                 { authenticatedUser ? 
                     <nav><span>Welcome {authenticatedUser}</span><a className="signout" href="index.html">Sign Out</a></nav> : 
                     <nav>
-                        <a className="signup" href="sign-up.html">Sign Up</a>
-                        <a className="signin" href="sign-in.html">Sign In</a>
+                        <NavLink className="signup" to="/signin">Sign Up</NavLink>
+                        <NavLink className="signin" to="/signin">Sign In</NavLink>
                     </nav>
                 }
             </div>

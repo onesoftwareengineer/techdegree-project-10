@@ -23,7 +23,7 @@ export default () => (
 
       <Switch>
         <Route exact path="/" component={Courses} />
-        <Route path="" component={UserSignIn} />
+        <Route path="/signin" component={UserSignIn} />
         <Route path="/courses/:id" component={CourseDetail} />
         <Route path="/error" component={UnhandledError} />
         <Route path="/forbidden" component={Forbidden} />
