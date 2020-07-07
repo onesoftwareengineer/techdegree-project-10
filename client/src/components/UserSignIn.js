@@ -11,7 +11,8 @@ class UserSignIn extends Component {
         super();
         this.state = {
             emailAddress: '',
-            password: ''
+            password: '',
+            errors: ''
         };
     };
 
@@ -28,15 +29,21 @@ class UserSignIn extends Component {
     }
 
     //user submits login form
-    submit = () => {
+    submit = async () => {
         //calls login method from Context by passing username and password
-        const validUser = this.props.context.login(this.state.emailAddress, this.state.password);
-        //if successfull navigate to / (so that it will display on the upper right the authenticated user)
-        if(validUser) {
+        const response = await this.props.context.login(this.state.emailAddress, this.state.password);
+                
+        //if there were any server errors send user to error page
+        if(response === 'error') {
+            this.props.history.push('/error');
+        } 
+        //else if response is true, then request is succesffull and user needs to be send to first page
+        else if(response) {
             this.props.history.push('/');
-        } else {
-        //if failed, display error message (enter valid credentials)
-            
+        }
+        //else it means reponse is false, so credentials were invalid, enter valid credentials error needs to be displayed
+        else {
+            this.setState({errors: "Enter valid credentials."});
         }
     }
 
@@ -47,6 +54,7 @@ class UserSignIn extends Component {
             <div className="bounds">
                 <div className="grid-33 centered signin">
                 <h1>Sign In</h1>
+                <p>{this.state.errors}</p>
                 <div>
                     <form onClick={this.prevent} onSubmit={this.prevent}>
                     <div><input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" value={this.state.email} onChange={this.handleValueChange}/></div>
@@ -67,5 +75,3 @@ class UserSignIn extends Component {
 }
 
 export default withContext(UserSignIn);
-
-  

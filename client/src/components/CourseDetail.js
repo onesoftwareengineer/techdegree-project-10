@@ -66,12 +66,17 @@ class CourseDetail extends Component {
                     postedBy,
                     userId: User.id
                 });
-            } else {
-                //if course not found, api will return a 404 and user will be forwarded to notfound page
-                this.props.history.push('/notfound');            
             }
-        } catch {
-            this.props.history.push('/error');
+        } catch(error) {
+            if(error.response)  {
+                if(error.response.status === 404) {
+                    //if course not found, api will return a 404 and user will be forwarded to notfound page
+                    this.props.history.push('/notfound');            
+                }
+            }
+            else {
+                this.props.history.push('/error');
+            }
         }
     }
 

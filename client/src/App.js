@@ -15,6 +15,7 @@ import NotFound from './components/NotFound';
 import UnhandledError from './components/UnhandledError';
 import Forbidden from './components/Forbidden';
 import UserSignIn from './components/UserSignIn';
+import UserSignOut from './components/UserSignOut';
 
 export default () => (
   <Router>
@@ -27,8 +28,9 @@ export default () => (
         <Route path="/courses/:id" component={CourseDetail} />
         <Route path="/error" component={UnhandledError} />
         <Route path="/forbidden" component={Forbidden} />
-        
+        <Route path="/signout" component={UserSignOut} />
         <Route component={NotFound} />
+
       </Switch>
     </div>
   </Router>
