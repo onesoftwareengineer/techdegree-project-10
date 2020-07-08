@@ -80,6 +80,7 @@ router.get('/users', asyncHandler(authenticateUser) ,asyncHandler( async (req, r
 // POST /api/users 201
 // Creates a user, sets the Location header to "/", and returns no content
 router.post('/users', asyncHandler( async (req, res, rext) => {
+    console.log(req.body);
     // try catch block is nested within the asynchandler block to handle validation errors thrown by sequelize
     try {
         // password hashing is done with sequelize with lifecycle hooks at the user model level with afterValidate callback function

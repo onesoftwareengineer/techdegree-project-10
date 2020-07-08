@@ -53,8 +53,15 @@ export class Provider extends Component {
         }  
     }
 
-    logout = () => {
-        this.setState(null);
+    //signout method used to clear state and cookie stored credentials
+    signout = () => {
+        //clear all stored credentials
+        this.setState({
+            authenticatedUser: null,
+            authenticatedUserId: null,
+            authenticatedUserEmail: null,
+            authenticatedUserPassword: null                 
+        });
         Cookies.remove('authenticatedUser');
     }
 
@@ -66,7 +73,7 @@ export class Provider extends Component {
                     authenticatedUserId: this.state.authenticatedUserId,
                     axiosRequest,
                     login: this.login,
-                    logout: this.logout
+                    signout: this.signout
                 }
             }>
                 {this.props.children}

@@ -1,7 +1,7 @@
 // UserSignOut - The component 
 //     signs out the authenticated user 
 //     and redirects the user to the default route (i.e. the list of courses).
-import React,{ Component } from 'React';
+import React,{Component} from 'react';
 import withContext from '../Context';
 import { Redirect } from 'react-router-dom';
 

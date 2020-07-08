@@ -18,9 +18,11 @@ const Header = (props) => {
             <div className="bounds">
                 <NavLink to="/"><h1 className="header--logo">Courses</h1></NavLink>
                 { authenticatedUser ? 
-                    <nav><span>Welcome {authenticatedUser}</span><a className="signout" href="index.html">Sign Out</a></nav> : 
+                    <nav><span>Welcome {authenticatedUser}</span>
+                        <NavLink className="signout" to="/signout">Sign Out</NavLink>
+                    </nav> : 
                     <nav>
-                        <NavLink className="signup" to="/signin">Sign Up</NavLink>
+                        <NavLink className="signup" to="/signup">Sign Up</NavLink>
                         <NavLink className="signin" to="/signin">Sign In</NavLink>
                     </nav>
                 }

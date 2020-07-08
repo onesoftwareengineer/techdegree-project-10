@@ -8,7 +8,7 @@ export default async function axiosRequest (
     requiresAuthentication = null,
     credentials = null,
     body = null,
-) {
+) {    
     let options = {
         method: requestType,
         url: baseUrl + requestUrl,
@@ -24,9 +24,9 @@ export default async function axiosRequest (
     }
 
     //if body is not empty, then stringify it in json format and add content header
-    if(!body) {
-        options.body = JSON.stringify(body);
+    if(body !== null) {
+        options.data = JSON.stringify(body);
     };
-
+    
     return axios(options);
 };

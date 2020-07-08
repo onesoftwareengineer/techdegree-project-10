@@ -2,11 +2,12 @@ import React from 'react';
 
 export default () => {
     return (
+        <>
+        <hr />
         <div className="bounds">
-            <div className="grid-66">
-                <h1>Requested resource not found. </h1>
-                <p>Try again or take into consideration it might have been removed.</p>
-            </div>
-        </div>        
+          <h1>Not Found</h1>
+          <p>Sorry! We couldn't find the page you're looking for.</p>
+        </div>    
+        </>
     )
 }
