@@ -29,7 +29,6 @@ const authenticateUser = async (req, res, next) => {
     let message = null;
     // parse credentials from authorizatoin header
     const credentials = auth(req);
-    console.log(credentials);
     // if credentials are available 
     if(credentials) {
         // search username in database, since email is unique findOne is used
@@ -81,7 +80,6 @@ router.get('/users', asyncHandler(authenticateUser) ,asyncHandler( async (req, r
 // POST /api/users 201
 // Creates a user, sets the Location header to "/", and returns no content
 router.post('/users', asyncHandler( async (req, res, rext) => {
-    console.log(req.body);
     // try catch block is nested within the asynchandler block to handle validation errors thrown by sequelize
     try {
         // password hashing is done with sequelize with lifecycle hooks at the user model level with afterValidate callback function
@@ -183,7 +181,6 @@ router.post('/courses', asyncHandler(authenticateUser) ,asyncHandler ( async (re
 router.put('/courses/:id', asyncHandler(authenticateUser) , asyncHandler( async (req,res,next) => {
     const title = req.body.title;
     const description = req.body.description;
-    console.log(title, description);
     const courseToUpdate = await Course.findByPk(req.params.id);
     // if the course was found
     if (courseToUpdate) {

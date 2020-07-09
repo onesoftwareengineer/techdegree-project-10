@@ -67,8 +67,21 @@ class UserSignUp extends Component {
                 if(error.response) {
                     //handle bad request to display validation errors
                     if(error.response.status === 400) {
-                        this.setState({errors: error.response.data.errors});
+                        let errorsArray = [];
+                        //if errors are stored in data.errors add them to errors
+                        if(error.response.data.errors) {
+                            errorsArray = errorsArray.concat(error.response.data.errors);
+                        }
+                        //if there are errors stored in data.message as a string add them to errors
+                        if(error.response.data.message) {
+                            errorsArray.push(error.response.data.message);
+                        }
+                        //update state with errors
+                        this.setState({errors: errorsArray});
                     }
+                }
+                else {
+                    this.props.history.push('/error');
                 }
             }
         }
@@ -82,8 +95,9 @@ class UserSignUp extends Component {
                 <div className="grid-33 centered signin">
                     <h1>Sign Up</h1>
                     <ul>
-                    {
+                    {   this.state.errors ? 
                         this.state.errors.map( (element, index) => <li key={index}>{element}</li> )
+                        : null
                     }
                     </ul>
                     <br />
