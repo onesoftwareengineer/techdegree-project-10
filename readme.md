@@ -7,22 +7,22 @@ It is comprised of two parts, a back-end part based on Node/Express and a front-
 * Client: JavaScript, React, Axios
 
 ## Screenshot
-![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot1.JPG)
+![image](https://github.com/onesoftwareengineer/techdegree-project-10/blob/master/screenshot1.JPG)
 *Courses homepage*
 
-![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot5.JPG)
+![image](https://github.com/onesoftwareengineer/techdegree-project-10/blob/master/screenshot5.JPG)
 *User signup*
 
-![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot4.JPG)
+![image](https://github.com/onesoftwareengineer/techdegree-project-10/blob/master/screenshot4.JPG)
 *User sigin*
 
-![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot2.JPG)
+![image](https://github.com/onesoftwareengineer/techdegree-project-10/blob/master/screenshot2.JPG)
 *Create new course*
 
-![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot3.JPG)
+![image](https://github.com/onesoftwareengineer/techdegree-project-10/blob/master/screenshot3.JPG)
 *View course details*
 
-![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot6.JPG)
+![image](https://github.com/onesoftwareengineer/techdegree-project-10/blob/master/screenshot6.JPG)
 *Update course*
 
 ## Additional comments
