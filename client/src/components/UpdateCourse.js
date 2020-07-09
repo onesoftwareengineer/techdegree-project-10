@@ -5,6 +5,7 @@
 import React, {Component} from 'react';
 import withContext from '../Context';
 import axiosRequest from '../Requests';
+import { Redirect } from 'react-router-dom';
 
 class UpdateCourse extends Component {
     constructor() {
@@ -20,9 +21,10 @@ class UpdateCourse extends Component {
             errors: []
         };
     }
-
+    
     //after component mounts get course details
     componentDidMount() {
+        //if requested course isn't owned by the authenticated user, redirect to /forbidden
         this.getCourse();
     }
 
@@ -91,6 +93,11 @@ class UpdateCourse extends Component {
                 //preparing posted by variable to be added to state
                 const postedBy = User.firstName + ' ' + User.lastName;
                 
+                //if course userid is different than the authenticateduserid then redirect to forbidden
+                if(User.id !== this.props.context.authenticatedUserId) {
+                    this.props.history.push('/forbidden');
+                }
+
                 //updating state
                 this.setState({
                     id,
@@ -130,53 +137,53 @@ class UpdateCourse extends Component {
     render () {
         return (
             <>
-      <hr />
-      <div class="bounds course--detail">
-        <h1>Update Course</h1>
-        <ul>
-            {this.state.errors.map( (element, index) => <li key={index}>{element}</li> )}
-        </ul>
-        <br />
-        <div>
-          <form
-          onclick={this.prevent}
-          onSubmit={this.prevent}
-          >
-            <div class="grid-66">
-              <div class="course--header">
-                <h4 class="course--label">Course</h4>
-                <div><input id="title" name="title" type="text" class="input-title course--title--input" placeholder="Course title..."
-                    value={this.state.title} onChange={this.handleValueChange} /></div>
-                <p>{this.state.postedBy}</p>
-              </div>
-              <div class="course--description">
-                <div><textarea id="description" name="description" class="" placeholder="Course description..." 
-                value={this.state.description} onChange={this.handleValueChange}>
-                </textarea></div>
-              </div>
-            </div>
-            <div class="grid-25 grid-right">
-              <div class="course--stats">
-                <ul class="course--stats--list">
-                  <li class="course--stats--list--item">
-                    <h4>Estimated Time</h4>
-                    <div><input id="estimatedTime" name="estimatedTime" type="text" class="course--time--input"
-                        placeholder="Hours" value="14 hours" /></div>
-                  </li>
-                  <li class="course--stats--list--item">
-                    <h4>Materials Needed</h4>
-                    <div><textarea id="materialsNeeded" name="materialsNeeded" class="" placeholder="List materials..."
-                        value={this.state.materialsNeeded} onChange={this.handleValueChange}>
-                    </textarea></div>
-                  </li>
+            <hr />
+            <div class="bounds course--detail">
+                <h1>Update Course</h1>
+                <ul>
+                    {this.state.errors.map( (element, index) => <li key={index}>{element}</li> )}
                 </ul>
-              </div>
+                <br />
+                <div>
+                <form
+                onclick={this.prevent}
+                onSubmit={this.prevent}
+                >
+                    <div class="grid-66">
+                    <div class="course--header">
+                        <h4 class="course--label">Course</h4>
+                        <div><input id="title" name="title" type="text" class="input-title course--title--input" placeholder="Course title..."
+                            value={this.state.title} onChange={this.handleValueChange} /></div>
+                        <p>{this.state.postedBy}</p>
+                    </div>
+                    <div class="course--description">
+                        <div><textarea id="description" name="description" class="" placeholder="Course description..." 
+                        value={this.state.description} onChange={this.handleValueChange}>
+                        </textarea></div>
+                    </div>
+                    </div>
+                    <div class="grid-25 grid-right">
+                    <div class="course--stats">
+                        <ul class="course--stats--list">
+                        <li class="course--stats--list--item">
+                            <h4>Estimated Time</h4>
+                            <div><input id="estimatedTime" name="estimatedTime" type="text" class="course--time--input"
+                                placeholder="Hours" value="14 hours" /></div>
+                        </li>
+                        <li class="course--stats--list--item">
+                            <h4>Materials Needed</h4>
+                            <div><textarea id="materialsNeeded" name="materialsNeeded" class="" placeholder="List materials..."
+                                value={this.state.materialsNeeded} onChange={this.handleValueChange}>
+                            </textarea></div>
+                        </li>
+                        </ul>
+                    </div>
+                    </div>
+                    <div class="grid-100 pad-bottom"><button class="button" type="submit" onClick={this.submit}>Update Course</button>
+                    <button class="button button-secondary" onClick={() => this.props.history.push(`/courses/${this.state.id}`)}>Cancel</button></div>
+                </form>
+                </div>
             </div>
-            <div class="grid-100 pad-bottom"><button class="button" type="submit" onClick={this.submit}>Update Course</button>
-            <button class="button button-secondary" onClick={() => this.props.history.push(`/courses/${this.state.id}`)}>Cancel</button></div>
-          </form>
-        </div>
-      </div>
             </>
         )
     }
