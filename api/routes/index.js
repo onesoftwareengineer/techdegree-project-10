@@ -29,6 +29,7 @@ const authenticateUser = async (req, res, next) => {
     let message = null;
     // parse credentials from authorizatoin header
     const credentials = auth(req);
+    console.log(credentials);
     // if credentials are available 
     if(credentials) {
         // search username in database, since email is unique findOne is used

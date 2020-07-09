@@ -7,6 +7,8 @@
 import React, {Component} from 'react';
 import withContext from '../Context';
 import { Link } from 'react-router-dom';
+import axiosRequest from '../Requests';
+import ReactMarkdown from 'react-markdown';
 
 class CourseDetail extends Component {
     constructor() {
@@ -14,9 +16,9 @@ class CourseDetail extends Component {
         this.state = {
             id: null, 
             title: null, 
-            descriptionParagraphs: null, 
             estimatedTime: null, 
-            materialsArray: null,
+            materialsNeeded: null,
+            description: null,
             postedBy: null,
             userId: null
         };
@@ -44,25 +46,14 @@ class CourseDetail extends Component {
 
                 //preparing posted by variable to be added to state
                 const postedBy = User.firstName + ' ' + User.lastName;
-                
-                //split different materials by \n sign as they added to the database from string to array
-                //the below code also removes * from the beginning of each material
-                const materialsArray = materialsNeeded ? materialsNeeded.split("*").join("").split('\n') : null;
-                //the below code removes the last array position due to the fact that the /n separator is present at the end of each entry
-                if(materialsNeeded) {
-                    materialsArray.pop();
-                }
-
-                //prepare description paragraphs by splitting string into array parts
-                const descriptionParagraphs = description.split('\n\n');
 
                 //updating state
                 this.setState({
                     id,
                     title,
-                    descriptionParagraphs,
+                    description,
+                    materialsNeeded,
                     estimatedTime,
-                    materialsArray,
                     postedBy,
                     userId: User.id
                 });
@@ -75,6 +66,43 @@ class CourseDetail extends Component {
                 }
             }
             else {
+                this.props.history.push('/error');
+            }
+        }
+    }
+
+    //method that sends a DELETE request through axios to delete a course
+    deleteCourse = async () => {
+        try {
+            //prepare credentials for sending delete request
+            const credentials = {
+                email: this.props.context.authenticatedUserEmail,
+                password: this.props.context.authenticatedUserPassword
+            };
+
+            const response = await axiosRequest(
+                'DELETE', 
+                `/api/courses/${this.state.id}`, 
+                true, 
+                credentials
+            );
+
+            //if course deleted successfully API should have returned a 204 response
+            if(response.status === 204) {
+                this.props.history.push('/');
+            }
+        } catch (error) {
+            if(error.response) {
+                //if course not found, redirect to not found page
+                if(error.response.status === 404) {
+                    this.props.history.push('/notfound');
+                }
+                //else if user tried to delete some elses course
+                else if(error.response.status === 403 || error.response.status === 401) {
+                    this.props.history.push('/forbidden');  
+                }
+            } else {
+                //else redirect to server error page
                 this.props.history.push('/error');
             }
         }
@@ -110,7 +138,7 @@ class CourseDetail extends Component {
 
                                     <span>
                                     <Link className="button" to={`/courses/${this.state.id}/update`}>Update Course</Link>
-                                    <a className="button" href="#">Delete Course</a></span> 
+                                    <button className="button" onClick={this.deleteCourse}>Delete Course</button></span> 
                                 : null
                         }
                         <Link className="button button-secondary" to="/">Return to List</Link>
@@ -126,7 +154,7 @@ class CourseDetail extends Component {
                     <p>By {this.state.postedBy}</p>
                     </div>
                     <div className="course--description">
-                        {descriptionJSX}
+                        <ReactMarkdown source={this.state.description} />
                     </div>
                 </div>
                 <div className="grid-25 grid-right">
@@ -138,11 +166,11 @@ class CourseDetail extends Component {
                                 <h3>{this.state.estimatedTime}</h3>
                             </li> : null
                         }
-                        {   this.state.materialsArray ?                    
+                        {   this.state.materialsNeeded ?                    
                             <li className="course--stats--list--item">
                                 <h4>Materials Needed</h4>
                                 <ul>
-                                    {materialsJSX}
+                                    <ReactMarkdown source={this.state.materialsNeeded} />                                    
                                 </ul>
                             </li> : null
                         }

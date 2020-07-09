@@ -33,14 +33,17 @@ class UserSignIn extends Component {
     submit = async () => {
         //calls login method from Context by passing username and password
         const response = await this.props.context.login(this.state.emailAddress, this.state.password);
-                
+        
         //if there were any server errors send user to error page
         if(response === 'error') {
             this.props.history.push('/error');
         } 
-        //else if response is true, then request is succesffull and user needs to be send to first page
+        //else if response is true, then request is succesffull and user needs to be send to first page or protected page he tried to access
         else if(response) {
-            this.props.history.push('/');
+            // const redirectTo = this.props.location.pathname !== '/signin' ? this.props.location.pathname : '/';
+            // user will be redirected to the url he came from if such a value is stored, otherwise he will be directed to /
+            const redirectTo = this.props.location.state ? this.props.location.state.from.pathname : '/';
+            this.props.history.push(redirectTo);
         }
         //else it means reponse is false, so credentials were invalid, enter valid credentials error needs to be displayed
         else {

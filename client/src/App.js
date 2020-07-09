@@ -4,7 +4,6 @@ import {
   Route, 
   Switch
 } from 'react-router-dom';
-
 import './styles/global.css'; 
 
 //importing app's components
@@ -17,6 +16,9 @@ import Forbidden from './components/Forbidden';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
 import UserSignUp from './components/UserSignUp';
+import CreateCourse from './components/CreateCourse';
+import UpdateCourse from './components/UpdateCourse';
+import PrivateRoute from './PrivateRoute';
 
 export default () => (
   <Router>
@@ -26,6 +28,8 @@ export default () => (
       <Switch>
         <Route exact path="/" component={Courses} />
         <Route path="/signin" component={UserSignIn} />
+        <PrivateRoute exact path="/courses/create" component={CreateCourse} />
+        <PrivateRoute path="/courses/:id/update" component={UpdateCourse} />        
         <Route path="/courses/:id" component={CourseDetail} />
         <Route path="/error" component={UnhandledError} />
         <Route path="/forbidden" component={Forbidden} />

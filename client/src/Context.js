@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 
 const AppContext = React.createContext();
 
+export const Consumer = AppContext.Consumer;
+
 //export context provider to wrap App in context and provide it to the whole app
 export class Provider extends Component {
     //get user credentials by destructuring authenticatedUser cookie if found, else null
@@ -71,6 +73,8 @@ export class Provider extends Component {
                 {
                     authenticatedUser: this.state.authenticatedUser,
                     authenticatedUserId: this.state.authenticatedUserId,
+                    authenticatedUserEmail: this.state.authenticatedUserEmail,
+                    authenticatedUserPassword: this.state.authenticatedUserPassword,
                     axiosRequest,
                     login: this.login,
                     signout: this.signout
