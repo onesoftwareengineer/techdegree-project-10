@@ -109,22 +109,6 @@ class CourseDetail extends Component {
     }
 
     render () {
-        //building the material list by mapping through the materials array
-        const materialsJSX = this.state.materialsArray ?                            
-            this.state.materialsArray.map( (element, index) => 
-                (
-                    <li key={index}>{element}</li>
-                )
-            ) : null;
-
-        //building the description paragraphs by mapping through the description paragraphs array
-        const descriptionJSX = this.state.descriptionParagraphs ?                            
-            this.state.descriptionParagraphs.map( (element, index) => 
-                (
-                    <p key={index}>{element}</p>
-                )
-            ) : null;
-
         return (
             <>
             <hr />

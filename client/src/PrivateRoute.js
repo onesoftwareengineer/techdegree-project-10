@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { Consumer } from './Context';
 import withContext from './Context';
-import UserSignIn from './components/UserSignIn';
 
 // solution A - adds consumer directly 
 // export default ({ component: Component, ...rest }) => {

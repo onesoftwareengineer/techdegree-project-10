@@ -28,7 +28,7 @@ export default async function axiosRequest (
         options.data = JSON.stringify(body);
     };
     
-    console.log('axios request will be sent now with the following options: ', options);
+    //console.log('axios request will be sent now with the following options: ', options);
 
     return axios(options);
 };

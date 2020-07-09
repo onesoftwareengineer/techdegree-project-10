@@ -35,6 +35,7 @@ export default () => (
         <Route path="/forbidden" component={Forbidden} />
         <Route path="/signout" component={UserSignOut} />
         <Route path="/signup" component={UserSignUp} />
+        <Route path="/notfound" component={NotFound} />
         <Route component={NotFound} />
 
       </Switch>
