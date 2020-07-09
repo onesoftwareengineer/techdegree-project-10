@@ -8,7 +8,22 @@ Client: JavaScript, React, Axios
 
 ## Screenshot
 ![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot1.JPG)
-*REST API routes*
+*Courses homepage*
+
+![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot5.JPG)
+*User signup*
+
+![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot4.JPG)
+*User sigin*
+
+![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot2.JPG)
+*Create new course*
+
+![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot3.JPG)
+*View course details*
+
+![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot6.JPG)
+*Update course*
 
 ## Additional comments
 - If you publish the project online please credit the source of the favicon image
