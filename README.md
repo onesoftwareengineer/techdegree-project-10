@@ -3,8 +3,8 @@ The app is basically a course database that allows users, to signup and then cre
 It is comprised of two parts, a back-end part based on Node/Express and a front-end part based on React.
 
 ## Technologies 
-Api: JavaScript, Node, Express, Sequelize, SQLite
-Client: JavaScript, React, Axios
+* Api: JavaScript, Node, Express, Sequelize, SQLite
+* Client: JavaScript, React, Axios
 
 ## Screenshot
 ![image](https://raw.githubusercontent.com/onesoftwareengineer/techdegree-project-9/master/screenshot1.JPG)
